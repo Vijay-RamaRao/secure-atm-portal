@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SecureATM - Transaction Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-container">
+                    <img src="atm.png" alt="ATM Icon" class="atm-icon">
+                    <span class="logo-text">SecureATM</span>
+                </div>
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html#features" class="nav-link">
+                    <span>Features</span>
+                </a>
+                <a href="index.html#about-us" class="nav-link">
+                    <span>About Us</span>
+                </a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link dropbtn" onclick="toggleDropdown()">
+                        <span>Contact</span>
+                        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="mailto:1755vijay1755@gmail.com" class="dropdown-item">
+                            <img src="email.png" alt="Email Icon" class="icon">
+                            <span>1755vijay1755@gmail.com</span>
+                        </a>
+                        <a href="tel:+919502013178" class="dropdown-item">
+                            <img src="telephone.png" alt="Phone Icon" class="icon">
+                            <span>+91 9502013178</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <script>
+            function toggleDropdown() {
+                const dropdown = document.getElementById('dropdownContent');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+            window.onclick = function(event) {
+                const dropdown = document.getElementById('dropdownContent');
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.dropbtn')) {
+                    dropdown.style.display = 'none';
+                }
+            }
+        </script>
+    </header>
+
+    <main class="main-content">
+        <div class="atm-status-card">
+            <div class="status-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="3" width="22" height="18" rx="2" ry="2"/>
+                    <line x1="1" y1="9" x2="23" y2="9"/>
+                    <path d="M8 21v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/>
+                </svg>
+                <h3>ATM Status</h3>
+            </div>
+            <div class="status-amount">
+                <span class="currency">₹</span>
+                <span id="atmAmount">50000</span>
+                <span class="status-label">Available</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Operational</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="transaction-badge">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>Secure Transaction</span>
+                    </div>
+                    <div class="card-title-section">
+                        <h2 class="card-title">Cash Withdrawal</h2>
+                        <p class="card-subtitle">Complete your transaction securely</p>
+                    </div>
+                </div>
+
+                <form id="withdrawal-authentication-form" class="form">
+                    <div class="input-group">
+                        <label for="amount" class="input-label">Withdrawal Amount</label>
+                        <div class="input-container amount-input">
+                            <div class="currency-symbol">₹</div>
+                            <input type="number" id="amount" placeholder="0" min="1" required>
+                        </div>
+                        <div class="amount-suggestions">
+                            <button type="button" class="amount-btn" data-amount="500">₹500</button>
+                            <button type="button" class="amount-btn" data-amount="1000">₹1000</button>
+                            <button type="button" class="amount-btn" data-amount="2000">₹2000</button>
+                            <button type="button" class="amount-btn" data-amount="5000">₹5000</button>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+
+                    <div class="input-group otp-group" style="display: none;">
+                        <label for="otp" class="input-label">Captcha Verification</label>
+                        <div class="input-container">
+                            <input type="text" id="otp" placeholder="Enter 6-digit number" maxlength="6" required>
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 1l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="otp-timer">
+                            <span>OTP expires in: <span id="timer">05:00</span></span>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" id="generate-otp" class="primary-btn">
+                            <span class="btn-text">Generate Captcha</span>
+                            <div class="btn-loader"></div>
+                            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7,10 12,15 17,10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                        
+                        <button type="submit" id="submit-btn" class="primary-btn withdraw-btn" style="display: none;">
+                            <span class="btn-text">Confirm Withdrawal</span>
+                            <div class="btn-loader"></div>
+                            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="success-message" class="message success-message"></div>
+                <div id="error-message" class="message error-message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 SecureATM - Your trusted banking partner</p>
+            <div class="footer-badges">
+                <span class="badge">SSL Encrypted</span>
+                <span class="badge">PCI Compliant</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD11TKGJ_hvH2Q2PEONR3Rv6T4bMuKUGWI",
+            authDomain: "atm-dispenser.firebaseapp.com",
+            projectId: "atm-dispenser",
+            storageBucket: "atm-dispenser.appspot.com",
+            messagingSenderId: "475421852141",
+            appId: "1:475421852141:web:750aed1bffaf2dddc867e4",
+            measurementId: "G-70F1QRCM5Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let generatedOTP;
+        const userAccountNumber = localStorage.getItem('accountNumber');
+        let userDocId;
+        let otpTimer;
+
+        // Amount suggestion buttons
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const amount = this.getAttribute('data-amount');
+                document.getElementById('amount').value = amount;
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+            });
+        });
+
+        async function fetchAtmAmount() {
+            const atmRef = doc(db, 'atm', 'dispenser');
+            const atmSnap = await getDoc(atmRef);
+
+            if (atmSnap.exists()) {
+                const atmAmount = atmSnap.data().atmAmount;
+                document.getElementById('atmAmount').textContent = atmAmount;
+                return atmAmount;
+            } else {
+                console.error("No such document!");
+                return 0;
+            }
+        }
+
+        // Fetch user bank balance from Firestore based on account number
+        async function fetchUserBankBalance(accountNumber) {
+            const usersRef = collection(db, 'users');
+            const q = query(usersRef, where('accountNumber', '==', accountNumber));
+
+            const querySnapshot = await getDocs(q);
+            if (querySnapshot.empty) {
+                throw new Error("User not found.");
+            } else {
+                userDocId = querySnapshot.docs[0].id;
+                return querySnapshot.docs[0].data().bankBalance; 
+            }
+        }
+
+        function generateOTP() {
+            generatedOTP = Math.floor(100000 + Math.random() * 900000);
+            showSuccess("Enter this number above: " + generatedOTP);
+            
+            document.querySelector('.otp-group').style.display = 'block';
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('generate-otp').style.display = 'none';
+            
+            startOtpTimer();
+        }
+
+        function startOtpTimer() {
+            let timeLeft = 300; // 5 minutes
+            const timerElement = document.getElementById('timer');
+            
+            otpTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    showError("OTP expired. Please generate a new one.");
+                    resetForm();
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        function resetForm() {
+            document.querySelector('.otp-group').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('generate-otp').style.display = 'block';
+            document.getElementById('otp').value = '';
+            generatedOTP = null;
+        }
+
+        document.getElementById('generate-otp').addEventListener('click', function(e) {
+            e.preventDefault();
+            const enteredAmount = parseInt(document.getElementById('amount').value);
+            const btn = this;
+            const btnText = btn.querySelector('.btn-text');
+
+            btn.classList.add('loading');
+            btnText.textContent = 'Generating...';
+
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+
+            if (enteredAmount <= 0) {
+                showError("Please enter an amount greater than 0.");
+                btn.classList.remove('loading');
+                btnText.textContent = 'Generate OTP';
+                return;
+            }
+
+            setTimeout(() => {
+                generateOTP();
+                btn.classList.remove('loading');
+                btnText.textContent = 'Generate OTP';
+            }, 1500);
+        });
+
+        document.getElementById('withdrawal-authentication-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const enteredOTP = document.getElementById('otp').value;
+            const enteredAmount = parseInt(document.getElementById('amount').value);
+            const btn = document.getElementById('submit-btn');
+            const btnText = btn.querySelector('.btn-text');
+
+            btn.classList.add('loading');
+            btnText.textContent = 'Processing...';
+
+            const currentAtmAmount = await fetchAtmAmount();
+
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+
+            if (enteredOTP == generatedOTP) {
+                try {
+                    if (enteredAmount > currentAtmAmount) {
+                        showError("Insufficient ATM balance.");
+                        btn.classList.remove('loading');
+                        btnText.textContent = 'Confirm Withdrawal';
+                        return;
+                    }
+
+                    const userBankBalance = await fetchUserBankBalance(userAccountNumber);
+                    if (enteredAmount > userBankBalance) {
+                        showError("Insufficient bank balance.");
+                        btn.classList.remove('loading');
+                        btnText.textContent = 'Confirm Withdrawal';
+                        return;
+                    }
+
+                    const newAtmAmount = currentAtmAmount - enteredAmount;
+
+                    await updateDoc(doc(db, 'atm', 'dispenser'), {
+                        atmAmount: newAtmAmount
+                    });
+
+                    const newUserBalance = userBankBalance - enteredAmount;
+                    await updateDoc(doc(db, 'users', userDocId), {
+                        bankBalance: newUserBalance
+                    });
+
+                    document.getElementById('atmAmount').textContent = newAtmAmount;
+
+                    let countdown = 5;
+                    const successMessage = document.getElementById('success-message');
+                    successMessage.innerHTML = `
+                        <div class="success-content">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            <div>
+                                <div class="success-title">Transaction Successful!</div>
+                                <div class="success-subtitle">Amount: ₹${enteredAmount}</div>
+                                <div class="countdown">Redirecting in ${countdown} seconds...</div>
+                            </div>
+                        </div>
+                    `;
+                    successMessage.style.display = 'flex';
+
+                    const countdownInterval = setInterval(() => {
+                        countdown -= 1;
+                        const countdownElement = successMessage.querySelector('.countdown');
+                        if (countdownElement) {
+                            countdownElement.textContent = `Redirecting in ${countdown} seconds...`;
+                        }
+
+                        if (countdown <= 0) {
+                            clearInterval(countdownInterval);
+                            window.location.href = "login.html"; 
+                        }
+                    }, 1000);
+
+                    document.getElementById('amount').value = '';
+                    document.getElementById('otp').value = '';
+                    document.getElementById('submit-btn').style.display = 'none';
+                    clearInterval(otpTimer);
+
+                } catch (error) {
+                    console.error("Error during transaction:", error);
+                    showError("An error occurred while processing the transaction. Please try again.");
+                }
+            } else {
+                showError("Invalid OTP. Please try again.");
+            }
+
+            btn.classList.remove('loading');
+            btnText.textContent = 'Confirm Withdrawal';
+        });
+
+        function showSuccess(message) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.textContent = message;
+            successMessage.style.display = 'flex';
+            successMessage.style.animation = 'slideInUp 0.5s ease-out';
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'flex';
+            errorMessage.style.animation = 'slideInUp 0.5s ease-out';
+        }
+
+        window.onload = fetchAtmAmount;
+    </script>
+</body>
+</html>

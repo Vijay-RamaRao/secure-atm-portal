@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SecureATM - Next Generation Banking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-container">
+                    <img src="atm.png" alt="ATM Icon" class="atm-icon">
+                    <span class="logo-text">SecureATM</span>
+                </div>
+            </a>
+            <nav class="nav-menu">
+                <a href="#about-us" class="nav-link">
+                    <span>About Us</span>
+                </a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link dropbtn" onclick="toggleDropdown()">
+                        <span>Contact</span>
+                        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="mailto:1755vijay1755@gmail.com" class="dropdown-item">
+                            <img src="email.png" alt="Email Icon" class="icon">
+                            <span>1755vijay1755@gmail.com</span>
+                        </a>
+                        <a href="tel:+919502013178" class="dropdown-item">
+                            <img src="telephone.png" alt="Phone Icon" class="icon">
+                            <span>+91 9502013178</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <script>
+            function toggleDropdown() {
+                const dropdown = document.getElementById('dropdownContent');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+            window.onclick = function(event) {
+                const dropdown = document.getElementById('dropdownContent');
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.dropbtn')) {
+                    dropdown.style.display = 'none';
+                }
+            }
+        </script>
+    </header>
+
+    <main class="landing-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Bank-Level Security</span>
+                </div>
+                <h1 class="hero-title">
+                    The Future of
+                    <span class="gradient-text">Secure Banking</span>
+                </h1>
+                <p class="hero-description">
+                    Experience next-generation ATM services with advanced security, instant transactions, 
+                    and seamless user experience. Your money, your control, completely secure.
+                </p>
+                <div class="hero-actions">
+                    <a href="login.html" class="cta-button primary">
+                        <span>Get Started</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14m-7-7l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#features" class="cta-button secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5,3 19,12 5,21 5,3"/>
+                        </svg>
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="atm.png" alt="ATM" class="atm-visual">
+                        </div>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <div class="card-balance">
+                        <div class="balance-label">Available Balance</div>
+                        <div class="balance-amount">₹<span id="atmBalance" class="loading">...</span></div>
+                        <div class="balance-status">
+                            <div class="status-dot"></div>
+                            <span>Live Balance</span>
+                            <span class="last-updated" id="lastUpdated"></span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <div class="action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7,10 12,15 17,10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Withdraw
+                        </div>
+                        <div class="action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/>
+                            </svg>
+                            Transfer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="features-header">
+                <h2>Why Choose SecureATM?</h2>
+                <p>Advanced security meets seamless convenience</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Multi-layer encryption and advanced fraud detection keep your transactions secure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Transactions</h3>
+                    <p>Lightning-fast processing with real-time balance updates and instant confirmations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Smart Interface</h3>
+                    <p>Intuitive design with OTP verification and comprehensive transaction management.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust-section">
+            <div class="trust-content">
+                <h2>Trusted by Thousands</h2>
+                <p>Join the growing community of users who trust SecureATM for their banking needs</p>
+                <div class="trust-stats">
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">₹10M+</div>
+                        <div class="stat-label">Transactions</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Users</div>
+                    </div>
+                </div>
+                <div class="security-badges">
+                    <div class="security-badge">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                        </svg>
+                        24/7 Monitoring
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 SecureATM - Your trusted banking partner</p>
+            <div class="footer-badges">
+                <span class="badge">SSL Encrypted</span>
+                <span class="badge">PCI Compliant</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD11TKGJ_hvH2Q2PEONR3Rv6T4bMuKUGWI",
+            authDomain: "atm-dispenser.firebaseapp.com",
+            projectId: "atm-dispenser",
+            storageBucket: "atm-dispenser.appspot.com",
+            messagingSenderId: "475421852141",
+            appId: "1:475421852141:web:750aed1bffaf2dddc867e4",
+            measurementId: "G-70F1QRCM5Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchAtmBalance() {
+            try {
+                const balanceElement = document.getElementById('atmBalance');
+                const lastUpdatedElement = document.getElementById('lastUpdated');
+                const atmRef = doc(db, 'atm', 'dispenser');
+                const atmSnap = await getDoc(atmRef);
+
+                if (atmSnap.exists()) {
+                    const atmAmount = atmSnap.data().atmAmount;
+                    balanceElement.textContent = atmAmount.toLocaleString('en-IN');
+                    balanceElement.classList.remove('loading');
+                    
+                    // Update last updated time
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('en-IN', { 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: true 
+                    });
+                    lastUpdatedElement.textContent = `• Updated ${timeString}`;
+                    
+                    return atmAmount;
+                } else {
+                    console.error("No ATM document found!");
+                    balanceElement.textContent = "0";
+                    balanceElement.classList.remove('loading');
+                    return 0;
+                }
+            } catch (error) {
+                console.error("Error fetching ATM balance:", error);
+                const balanceElement = document.getElementById('atmBalance');
+                balanceElement.textContent = "Error";
+                balanceElement.classList.remove('loading');
+                return 0;
+            }
+        }
+
+        // Update balance every 30 seconds for real-time updates
+        function startBalanceUpdates() {
+            fetchAtmBalance(); // Initial fetch
+            
+            // Add visual feedback when updating
+            setInterval(() => {
+                const balanceElement = document.getElementById('atmBalance');
+                balanceElement.style.transition = 'opacity 0.3s ease';
+                balanceElement.style.opacity = '0.7';
+                
+                fetchAtmBalance().then(() => {
+                    setTimeout(() => {
+                        balanceElement.style.opacity = '1';
+                    }, 300);
+                });
+            }, 30000); // Update every 30 seconds
+        }
+
+        // Start updates when page loads
+        window.addEventListener('load', startBalanceUpdates);
+    </script>
+</body>
+</html>

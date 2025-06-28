@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureATM - Change PIN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-container">
+                    <img src="atm.png" alt="ATM Icon" class="atm-icon">
+                    <span class="logo-text">SecureATM</span>
+                </div>
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html#features" class="nav-link">
+                    <span>Features</span>
+                </a>
+                <a href="index.html#about-us" class="nav-link">
+                    <span>About Us</span>
+                </a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="nav-link dropbtn" onclick="toggleDropdown()">
+                        <span>Contact</span>
+                        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="mailto:1755vijay1755@gmail.com" class="dropdown-item">
+                            <img src="email.png" alt="Email Icon" class="icon">
+                            <span>1755vijay1755@gmail.com</span>
+                        </a>
+                        <a href="tel:+919502013178" class="dropdown-item">
+                            <img src="telephone.png" alt="Phone Icon" class="icon">
+                            <span>+91 9502013178</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <script>
+            function toggleDropdown() {
+                const dropdown = document.getElementById('dropdownContent');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+            window.onclick = function(event) {
+                const dropdown = document.getElementById('dropdownContent');
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.dropbtn')) {
+                    dropdown.style.display = 'none';
+                }
+            }
+        </script>       
+    </header>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <div class="hero-text">
+                <h1 class="hero-title">Security Settings</h1>
+                <p class="hero-subtitle">Update your PIN to keep your account secure</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="security-badge">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        <span>PIN Management</span>
+                    </div>
+                    <div class="card-title-section">
+                        <h2 class="card-title">Change PIN</h2>
+                        <p class="card-subtitle">Create a new secure PIN for your account</p>
+                    </div>
+                </div>
+
+                <form id="changePinForm" class="form" novalidate>
+                    <div class="input-group">
+                        <label for="accountNumber" class="input-label">Account Number</label>
+                        <div class="input-container">
+                            <input type="text" id="accountNumber" placeholder="Enter your account number" required data-error="*Account Number is required">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                    <line x1="1" y1="10" x2="23" y2="10"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="oldPin" class="input-label">Current PIN</label>
+                        <div class="input-container">
+                            <input type="password" id="oldPin" placeholder="Enter your current PIN" maxlength="4" required data-error="*Current PIN is required">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+
+                    <div class="pin-requirements">
+                        <h4>PIN Requirements:</h4>
+                        <ul>
+                            <li class="requirement" data-rule="length">
+                                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                                Exactly 4 digits
+                            </li>
+                            <li class="requirement" data-rule="different">
+                                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                                Different from current PIN
+                            </li>
+                            <li class="requirement" data-rule="match">
+                                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                                Both PINs match
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newPin" class="input-label">New PIN</label>
+                        <div class="input-container">
+                            <input type="password" id="newPin" placeholder="Enter your new 4-digit PIN" maxlength="4" required data-error="*New PIN is required">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="confirmNewPin" class="input-label">Confirm New PIN</label>
+                        <div class="input-container">
+                            <input type="password" id="confirmNewPin" placeholder="Re-enter your new PIN" maxlength="4" required data-error="*PIN confirmation is required">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="error-tooltip"></span>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Update PIN</span>
+                        <div class="btn-loader"></div>
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <div id="success-message" class="message success-message"></div>
+                <div id="error-message" class="message error-message"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 SecureATM - Your trusted banking partner</p>
+            <div class="footer-badges">
+                <span class="badge">SSL Encrypted</span>
+                <span class="badge">PCI Compliant</span>
+            </div>
+        </div>
+    </footer>
+    <script src="config.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyD11TKGJ_hvH2Q2PEONR3Rv6T4bMuKUGWI",
+            authDomain: "atm-dispenser.firebaseapp.com",
+            projectId: "atm-dispenser",
+            storageBucket: "atm-dispenser.appspot.com",
+            messagingSenderId: "475421852141",
+            appId: "1:475421852141:web:750aed1bffaf2dddc867e4",
+            measurementId: "G-70F1QRCM5Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // PIN validation
+        function validatePin() {
+            const oldPin = document.getElementById('oldPin').value;
+            const newPin = document.getElementById('newPin').value;
+            const confirmPin = document.getElementById('confirmNewPin').value;
+
+            // Length check
+            const lengthValid = newPin.length === 4 && /^\d{4}$/.test(newPin);
+            updateRequirement('length', lengthValid);
+
+            // Different from old PIN
+            const differentValid = newPin !== oldPin && newPin.length > 0;
+            updateRequirement('different', differentValid);
+
+            // PINs match
+            const matchValid = newPin === confirmPin && newPin.length > 0;
+            updateRequirement('match', matchValid);
+
+            return lengthValid && differentValid && matchValid;
+        }
+
+        function updateRequirement(rule, isValid) {
+            const requirement = document.querySelector(`[data-rule="${rule}"]`);
+            if (isValid) {
+                requirement.classList.add('valid');
+            } else {
+                requirement.classList.remove('valid');
+            }
+        }
+
+        // Add event listeners for real-time validation
+        ['newPin', 'confirmNewPin', 'oldPin'].forEach(id => {
+            document.getElementById(id).addEventListener('input', validatePin);
+        });
+    
+        document.getElementById("changePinForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+    
+            const submitBtn = this.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            
+            submitBtn.classList.add('loading');
+            btnText.textContent = 'Updating PIN...';
+
+            let formValid = true;
+    
+            document.querySelectorAll('.error-tooltip').forEach(tooltip => {
+                tooltip.style.display = 'none';
+                tooltip.style.color = '';
+            });
+    
+            document.querySelectorAll('input[required]').forEach((input) => {
+                const inputGroup = input.closest('.input-group');
+                const errorTooltip = inputGroup.querySelector('.error-tooltip');
+                if (!input.value.trim()) {
+                    errorTooltip.textContent = input.getAttribute('data-error');
+                    errorTooltip.style.display = 'block';
+                    formValid = false;
+                }
+            });
+    
+            if (!formValid) {
+                submitBtn.classList.remove('loading');
+                btnText.textContent = 'Update PIN';
+                return;
+            }
+    
+            const accountNumber = document.getElementById("accountNumber").value;
+            const oldPin = document.getElementById("oldPin").value;
+            const newPin = document.getElementById("newPin").value;
+            const confirmNewPin = document.getElementById("confirmNewPin").value;
+    
+            if (!validatePin()) {
+                showError("Please ensure all PIN requirements are met.");
+                submitBtn.classList.remove('loading');
+                btnText.textContent = 'Update PIN';
+                return;
+            }
+
+            if (newPin !== confirmNewPin) {
+                showError("New PINs do not match. Please try again.");
+                submitBtn.classList.remove('loading');
+                btnText.textContent = 'Update PIN';
+                return;
+            }
+    
+            try {
+                const userRef = collection(db, "users");
+                const q = query(userRef, where("accountNumber", "==", accountNumber));
+                const querySnapshot = await getDocs(q);
+    
+                if (querySnapshot.empty) {
+                    showError("Account not found.");
+                    submitBtn.classList.remove('loading');
+                    btnText.textContent = 'Update PIN';
+                    return;
+                }
+    
+                let userDoc;
+                querySnapshot.forEach((doc) => {
+                    const userData = doc.data();
+                    if (userData.pinNumber === oldPin) {
+                        userDoc = doc.ref;
+                    }
+                });
+    
+                if (!userDoc) {
+                    showError("Incorrect current PIN.");
+                    submitBtn.classList.remove('loading');
+                    btnText.textContent = 'Update PIN';
+                } else {
+                    await updateDoc(userDoc, { pinNumber: newPin });
+                    showSuccess("PIN updated successfully!");
+                    
+                    // Clear form
+                    document.getElementById("changePinForm").reset();
+                    document.querySelectorAll('.requirement').forEach(req => req.classList.remove('valid'));
+                    
+                    submitBtn.classList.remove('loading');
+                    btnText.textContent = 'Update PIN';
+                }
+            } catch (error) {
+                showError("Error updating PIN. Please try again later.");
+                submitBtn.classList.remove('loading');
+                btnText.textContent = 'Update PIN';
+            }
+        });
+    
+        function showSuccess(message) {
+            const successMessage = document.getElementById("success-message");
+            successMessage.innerHTML = `
+                <div class="success-content">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                    <div>
+                        <div class="success-title">${message}</div>
+                        <div class="countdown">Redirecting to home page in 5 seconds...</div>
+                    </div>
+                </div>
+            `;
+            successMessage.style.display = "flex";
+            successMessage.style.animation = 'slideInUp 0.5s ease-out';
+    
+            let countdown = 5;
+            const countdownInterval = setInterval(() => {
+                countdown -= 1;
+                const countdownElement = successMessage.querySelector('.countdown');
+                if (countdownElement) {
+                    countdownElement.textContent = `Redirecting to home page in ${countdown} seconds...`;
+                }
+            
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = "login.html";
+                }
+            }, 1000);
+        }
+    
+        function showError(message) {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = message;
+            errorMessage.style.display = "flex";
+            errorMessage.style.animation = 'slideInUp 0.5s ease-out';
+        }
+    </script>
+</body>
+</html>
